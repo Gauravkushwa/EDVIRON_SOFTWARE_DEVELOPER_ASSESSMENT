@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 // ✅ CORS middleware
 const allowOrigins = [
-  "stunning-flan-378a50.netlify.app"
+  "https://stunning-flan-378a50.netlify.app"
 ]
 app.use(cors({
   origin: allowOrigins, // local frontend origin
