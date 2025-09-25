@@ -3,7 +3,7 @@ import  store  from "../store/index";
 import { clearCredentials } from "../store/slices/authSlice";
 
 const api = axios.create({
-  baseURL: "http://localhost:8765/api",
+  baseURL: "https://edviron-software-developer-assessment-2.onrender.com/api",
   withCredentials: true, 
   headers: {
     "Content-Type": "application/json",
