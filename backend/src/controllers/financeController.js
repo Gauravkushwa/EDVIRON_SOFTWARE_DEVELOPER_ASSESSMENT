@@ -36,14 +36,14 @@ const listTransactions = async (req, res) => {
     const limit = Math.min(parseInt(req.query.limit) || 20, 100);
     const skip = (page - 1) * limit;
 
-    const { status, sort } = req.query; // <-- get filters from query
+    const { status, sort } = req.query;
 
     let query = {};
     if (status) {
       query.status = status; // filter by status
     }
 
-    let sortOption = { createdAt: -1 }; // default: newest first
+    let sortOption = { createdAt: -1 }; 
     if (sort === "asc") sortOption = { createdAt: 1 };
     if (sort === "desc") sortOption = { createdAt: -1 };
 

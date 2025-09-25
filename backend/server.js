@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const env = require("dotenv");
 const { DB_Connection } = require("./src/config/db");
-const { app } = require("./src/app"); // your main express app
+const { app } = require("./src/app"); 
 
 env.config();
 DB_Connection();

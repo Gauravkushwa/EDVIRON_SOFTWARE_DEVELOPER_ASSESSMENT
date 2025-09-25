@@ -2,9 +2,6 @@ const { OrderModel } = require('../models/Order');
 const { TransactionModel } = require('../models/Transaction');
 const paymentService = require('../services/paymentService');
 
-/**
- * Create an order (user or school_staff)
- */
 const createOrder = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -17,7 +14,7 @@ const createOrder = async (req, res) => {
     // ✅ Decide schoolId based on role
     let schoolId;
     if (req.user.role === 'school_staff') {
-      schoolId = req.user.schoolId; // must be saved in User model
+      schoolId = req.user.schoolId; 
     } else {
       schoolId = bodySchoolId;
     }

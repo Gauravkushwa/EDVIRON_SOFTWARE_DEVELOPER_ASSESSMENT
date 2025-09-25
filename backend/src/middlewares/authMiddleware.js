@@ -26,7 +26,7 @@ const authMiddleware = async (req, res, next) => {
       return res.status(401).json({ message: "Unauthorized - User not found" });
     }
 
-    req.user = user; // attach user to request
+    req.user = user;
     next();
   } catch (error) {
     console.error("JWT Verify failed:", error.message);

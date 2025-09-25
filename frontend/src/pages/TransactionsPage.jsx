@@ -10,7 +10,7 @@ const TransactionsPage = () => {
 
   const [page, setPage] = useState(1);
   const [statusFilter, setStatusFilter] = useState(""); // "", "success", "failed", "pending"
-  const [sortOrder, setSortOrder] = useState("desc"); // "asc" or "desc"
+  const [sortOrder, setSortOrder] = useState("desc"); // "asc" or "desc" .
 
   useEffect(() => {
     dispatch(fetchTransactions({ page, limit: 10, status: statusFilter, sort: sortOrder }));

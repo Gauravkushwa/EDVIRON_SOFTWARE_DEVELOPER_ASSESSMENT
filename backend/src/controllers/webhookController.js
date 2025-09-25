@@ -27,7 +27,6 @@ const razorpayWebhook = async (req, res) => {
       return res.status(400).json({ error: 'Invalid signature' });
     }
 
-    // handle event types - common types: payment.authorized, payment.captured, payment.failed, order.paid
     const event = req.body.event;
     const payload = req.body.payload || {};
 

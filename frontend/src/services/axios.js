@@ -4,7 +4,7 @@ import { clearCredentials } from "../store/slices/authSlice";
 
 const api = axios.create({
   baseURL: "http://localhost:8765/api",
-  withCredentials: true, // important
+  withCredentials: true, 
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
