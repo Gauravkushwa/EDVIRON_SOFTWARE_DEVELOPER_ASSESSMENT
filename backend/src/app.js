@@ -8,14 +8,22 @@ dotenv.config();
 const app = express();
 // ✅ CORS middleware
 const allowedOrigins = [
-  "http://localhost:5173", // local dev
-  "https://stunning-flan-378a50.netlify.app" // deployed frontend
+  "https://stunning-flan-378a50.netlify.app"
 ];
+
 app.use(cors({
-  origin: allowedOrigins, // local frontend origin
- methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS: " + origin));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
 }));
+
 
 
 // Routes
