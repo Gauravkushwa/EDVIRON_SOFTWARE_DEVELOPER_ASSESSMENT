@@ -6,9 +6,24 @@ const cors = require('cors')
 
 dotenv.config();
 const app = express();
+
+
+// ✅ JSON body parser with raw body capture (for webhooks)
+app.use(bodyParser.json({
+  verify: function (req, res, buf, encoding) {
+    req.rawBody = buf.toString(encoding || 'utf8'); // store raw body for webhook signature verification
+  }
+}));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// ✅ Cookie parser (for refresh tokens if you’re using cookies)
+app.use(cookieParser());
+
 // ✅ CORS middleware
 const allowedOrigins = [
-  "https://stunning-flan-378a50.netlify.app"
+  "https://stunning-flan-378a50.netlify.app",
+  // https://stunning-flan-378a50.netlify.app
+  "http://localhost:8765"
 ];
 
 app.use(cors({
@@ -24,6 +39,19 @@ app.use(cors({
   credentials: true,
 }));
 
+app.options("*", cors());
+
+origin: (origin, callback) => {
+  console.log("Incoming origin:", origin); // 👀
+  if (!origin) return callback(null, true);
+  if (allowedOrigins.includes(origin)) {
+    callback(null, true);
+  } else {
+    callback(new Error("Not allowed by CORS: " + origin));
+  }
+}
+
+
 
 
 // Routes
@@ -33,17 +61,6 @@ const webhookRoutes = require('./routes/webhookRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const financeRoutes = require('./routes/financeRoutes')
 
-
-// ✅ JSON body parser with raw body capture (for webhooks)
-app.use(bodyParser.json({
-  verify: function (req, res, buf, encoding) {
-    req.rawBody = buf.toString(encoding || 'utf8'); // store raw body for webhook signature verification
-  }
-}));
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// ✅ Cookie parser (for refresh tokens if you’re using cookies)
-app.use(cookieParser());
 
 
 // Routes

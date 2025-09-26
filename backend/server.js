@@ -6,9 +6,9 @@ const { app } = require("./src/app");
 
 env.config();
 
+app.use(express.json()); // parse JSON
 // Enable CORS
 app.use(cors());
-app.use(express.json()); // parse JSON
 
 // Example health route
 app.get("/", (req, res) => {
