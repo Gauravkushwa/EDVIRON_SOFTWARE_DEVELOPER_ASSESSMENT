@@ -14,7 +14,9 @@ function App() {
       <Navbar />
       <Routes>
         {/* Default redirect */}
-        <Route path="/" element={<Navigate to="/login" />} />
+        {/* <Route path="/" element={<Navigate to="/login" />} />
+         */}
+         <Route path="/" element = {<DashboardPage />} />
 
         {/* Public routes */}
         <Route path="/login" element={<LoginPage />} />
